@@ -1,0 +1,40 @@
+using System;
+using UnityEngine;
+
+public class Cell : MonoBehaviour, IFighterChanger
+{
+    public event Action<OwnerEnum> OnEngage;
+    [SerializeField, Range(0,1000)] private int _fighters;
+    [SerializeField] private int _limit;
+    [SerializeField] private OwnerEnum _owner;
+
+    public  int Fighters {  get { return _fighters; }}
+    public int Limit { get { return _limit; }}
+
+    public void InitializeCell(int fighters, int limit, OwnerEnum owner)
+    {
+        _fighters = fighters;
+        _limit = limit;
+        _owner = owner;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    public void AddFighter()
+    {
+        _fighters++;
+    }
+
+    public void RemoveFighter()
+    {
+        _fighters--;
+    }
+
+    public void ChangeOwner(OwnerEnum newOwner)
+    {
+        _owner = newOwner;
+    }
+}
