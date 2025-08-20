@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 69291110}
   - component: {fileID: 69291109}
   - component: {fileID: 69291111}
+  - component: {fileID: 69291112}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -182,6 +183,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8034b581ffc7d1f44b09041480491596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &69291112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69291108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336b49206ba61f047abbd7047d0c53de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &330585543
@@ -503,6 +516,7 @@ GameObject:
   - component: {fileID: 1018949524}
   - component: {fileID: 1018949525}
   - component: {fileID: 1018949526}
+  - component: {fileID: 1018949527}
   m_Layer: 0
   m_Name: LevelBootstrap
   m_TagString: Untagged
@@ -562,6 +576,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8034b581ffc7d1f44b09041480491596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1018949527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018949522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86325f5c6da8ae14c8938f2f881fec62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cells: []
+  _clickHandler: {fileID: 69291112}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

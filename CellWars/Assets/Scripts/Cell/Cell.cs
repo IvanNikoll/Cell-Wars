@@ -4,12 +4,15 @@ using UnityEngine;
 public class Cell : MonoBehaviour, IFighterChanger
 {
     public event Action<OwnerEnum> OnEngage;
+    public event Action<Cell> Clicked;
+
     [SerializeField, Range(0,1000)] private int _fighters;
     [SerializeField] private int _limit;
     [SerializeField] private OwnerEnum _owner;
 
     public  int Fighters {  get { return _fighters; }}
     public int Limit { get { return _limit; }}
+    public OwnerEnum Owner { get { return _owner; }}
 
     public void InitializeCell(int fighters, int limit, OwnerEnum owner)
     {
@@ -37,4 +40,5 @@ public class Cell : MonoBehaviour, IFighterChanger
     {
         _owner = newOwner;
     }
+
 }
