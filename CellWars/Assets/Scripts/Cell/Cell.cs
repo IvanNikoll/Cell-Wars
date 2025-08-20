@@ -26,6 +26,7 @@ public class Cell : MonoBehaviour, IFighterChanger
     public void AddFighter()
     {
         _fighters++;
+        Debug.Log("Added 1 fighter to " + this.gameObject.name);
     }
 
     public void RemoveFighter()

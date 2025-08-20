@@ -7,7 +7,9 @@ public class CellSpawner : MonoBehaviour
     [SerializeField] private Vector3 _playerCellPos;
     [SerializeField] private Vector3 _NPCCellPos;
     [SerializeField] private CellFactory _cellFactory;
-    // add a player config and an enemy (enemies) config to initialize cell stats on start.
+    [SerializeField] private PlayerSettings PlayerSettings; // change to a congfig file or class later
+    [SerializeField] private PlayerSettings NPCSettings; // create a class responsible for loading level configs and pass number and stats of enemies here.
+    [SerializeField] private TickService _tickService;
 
     public Cell GetCell(OwnerEnum owner)
     {
@@ -27,23 +29,21 @@ public class CellSpawner : MonoBehaviour
 
     private void InitializePlayer(Cell player)
     {
-        //temporary solution
-        int fighters = 10;
-        int limit = 50;
-        OwnerEnum owner = OwnerEnum.Player1;
-        //
+        int fighters = PlayerSettings.Fighters;
+        int limit = PlayerSettings.Limit;
+        OwnerEnum owner = PlayerSettings.Owner;
         player.transform.position = _playerCellPos;
         player.InitializeCell(fighters, limit, owner);
+        CellBrain cellBrain = new CellBrain(player, _tickService);
     }
 
     private void InitializeNPC(Cell npc)
     {
-        //temporary solution
-        int fighters = 5;
-        int limit = 40;
-        OwnerEnum owner = OwnerEnum.Playyer2;
-        //
+        int fighters = NPCSettings.Fighters;
+        int limit = NPCSettings.Limit;
+        OwnerEnum owner = NPCSettings.Owner;
         npc.transform.position = _NPCCellPos;
         npc.InitializeCell(fighters, limit, owner);
+        CellBrain cellBrain = new CellBrain(npc, _tickService);
     }
 }
