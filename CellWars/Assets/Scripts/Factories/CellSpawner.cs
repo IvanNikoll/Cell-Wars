@@ -29,21 +29,15 @@ public class CellSpawner : MonoBehaviour
 
     private void InitializePlayer(Cell player)
     {
-        int fighters = PlayerSettings.Fighters;
-        int limit = PlayerSettings.Limit;
-        OwnerEnum owner = PlayerSettings.Owner;
         player.transform.position = _playerCellPos;
-        player.InitializeCell(fighters, limit, owner);
-        CellBrain cellBrain = new CellBrain(player, _tickService);
+        player.InitializeCell(PlayerSettings.Fighters, PlayerSettings.Limit, PlayerSettings.Owner);
+        CellBrain cellBrain = new CellBrain(player, _tickService, PlayerSettings.AddInterval);
     }
 
     private void InitializeNPC(Cell npc)
     {
-        int fighters = NPCSettings.Fighters;
-        int limit = NPCSettings.Limit;
-        OwnerEnum owner = NPCSettings.Owner;
         npc.transform.position = _NPCCellPos;
-        npc.InitializeCell(fighters, limit, owner);
-        CellBrain cellBrain = new CellBrain(npc, _tickService);
+        npc.InitializeCell(NPCSettings.Fighters, NPCSettings.Limit, NPCSettings.Owner);
+        CellBrain cellBrain = new CellBrain(npc, _tickService, NPCSettings.AddInterval);
     }
 }

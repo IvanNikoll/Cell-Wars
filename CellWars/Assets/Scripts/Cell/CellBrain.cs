@@ -6,11 +6,12 @@ public class CellBrain
     private float _timer;
     private float _addInterval = 1f;
 
-    public CellBrain(Cell cell, TickService tickService)
+    public CellBrain(Cell cell, TickService tickService, float addInterval)
     {
         _cell = cell;
         _fighterChanger = cell;
         _tickService = tickService;
+        _addInterval = addInterval;
         Subscribe();
     }
 
