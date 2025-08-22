@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class controls interaction with cells
+/// </summary>
 public class CellInteractionController : MonoBehaviour
 {
     [SerializeField] private FighterController _fighterController;

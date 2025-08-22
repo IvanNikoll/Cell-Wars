@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// This class holds information about cell and its stats
+/// </summary>
 public class Cell : MonoBehaviour, IFighterChanger
 {
     public event Action<OwnerEnum> OnEngage;
@@ -21,11 +24,6 @@ public class Cell : MonoBehaviour, IFighterChanger
         _owner = owner;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     public void AddFighter()
     {
         _fighters++;
@@ -39,11 +37,6 @@ public class Cell : MonoBehaviour, IFighterChanger
     public void ChangeOwner(OwnerEnum newOwner)
     {
         _owner = newOwner;
-    }
-
-    public void SendFighters(CellView target, int amount)
-    {
-
     }
 
     public int CheckFighters()

@@ -1,8 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// This class is responcible for initiating cells on level start
+/// </summary>
 public class LevelBootstrap : MonoBehaviour
 {
     [SerializeField] private CellSpawner _cellSpawner;
+
     private void Start()
     {
         InitiatePlayer();

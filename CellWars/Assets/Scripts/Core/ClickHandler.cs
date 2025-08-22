@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// This class processes user's interaction with the app
+/// </summary>
 public class ClickHandler : MonoBehaviour
 {
     public event Action<CellView> Click;

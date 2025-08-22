@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This is a test object for holding player stats. to be swapped to a config file later
+/// </summary>
 [CreateAssetMenu(fileName = "PlayerSettings", menuName = "Settings/StartSettings")]
 public class PlayerSettings : ScriptableObject
 {
@@ -12,5 +15,4 @@ public class PlayerSettings : ScriptableObject
     public int Limit { get { return _limit; } }
     public OwnerEnum Owner { get { return _owner; } }
     public float AddInterval { get { return _addInterval; } }
-
 }

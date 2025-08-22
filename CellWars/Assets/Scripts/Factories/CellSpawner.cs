@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This class spawns cells on level start
+/// </summary>
 public class CellSpawner : MonoBehaviour
 {
     [SerializeField] private Cell _playerPrefab;

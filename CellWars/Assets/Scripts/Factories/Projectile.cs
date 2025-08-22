@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// This cllass holds and navigates fighters.
+/// </summary>
 public class Projectile : MonoBehaviour
 {
     private IObjectPool<Projectile> _objectPool;
@@ -9,7 +12,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private OwnerEnum _owner;
     [SerializeField] private Vector3 _targetPosition;
     [SerializeField] private bool _isActive;
-    private float _speed = 0.3f;
+
+    private float _speed = 0.3f; // to be set in Initialize later;
 
     public void Initialize(OwnerEnum owner, Vector3 target)
     {

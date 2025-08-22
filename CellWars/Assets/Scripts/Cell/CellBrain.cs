@@ -1,10 +1,14 @@
+/// <summary>
+/// This class is used for producing fighters
+/// </summary>
 public class CellBrain
 {
+    private IFighterChanger _fighterChanger;
     private TickService _tickService;
     private Cell _cell;
-    private IFighterChanger _fighterChanger;
+
+    private float _addInterval;
     private float _timer;
-    private float _addInterval = 1f;
 
     public CellBrain(Cell cell, TickService tickService, float addInterval)
     {
@@ -34,5 +38,15 @@ public class CellBrain
     {
         if(_cell.Fighters<_cell.Limit)
             _fighterChanger.AddFighter();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    private void Unsubscribe()
+    {
+        _tickService.OnTick -= Tick;
     }
 }

@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// This class controls fighter object pool and sends them towards targets.
+/// </summary>
 public class FighterController : MonoBehaviour
 {
     [SerializeField] private Projectile _fighterPrefab;
