@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 69291109}
   - component: {fileID: 69291111}
   - component: {fileID: 69291112}
+  - component: {fileID: 69291113}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -197,6 +198,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336b49206ba61f047abbd7047d0c53de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &69291113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69291108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d681b4e041cbd4580ab875efa2eafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fighterPrefab: {fileID: 1945383350703141898, guid: feb1a613e8bab7141a411721f3d8fd5c, type: 3}
+  _emitionPosition: {fileID: 0}
+  _collectionCheck: 1
+  _defaultCapacity: 100
+  _maxSize: 500
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,8 +606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86325f5c6da8ae14c8938f2f881fec62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fighterController: {fileID: 69291113}
   _cells: []
   _clickHandler: {fileID: 69291112}
+  _selectedCell: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

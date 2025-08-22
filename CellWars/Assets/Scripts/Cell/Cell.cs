@@ -41,4 +41,18 @@ public class Cell : MonoBehaviour, IFighterChanger
         _owner = newOwner;
     }
 
+    public void SendFighters(CellView target, int amount)
+    {
+
+    }
+
+    public int CheckFighters()
+    {
+        return Fighters;
+    }
+
+    public OwnerEnum CheckOwner()
+    {
+        return Owner;
+    }
 }

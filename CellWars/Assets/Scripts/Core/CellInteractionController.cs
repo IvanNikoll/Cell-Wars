@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CellInteractionController : MonoBehaviour
 {
+    [SerializeField] private FighterController _fighterController;
     [SerializeField] private List<CellView> _cells;
     [SerializeField] private ClickHandler _clickHandler;
     [SerializeField] private CellView _selectedCell;
+    private Coroutine _spawningCoroutine;
+    private float _nextTimeToEmit = 0.5f;
 
     public void Start()
     {
@@ -45,7 +49,7 @@ public class CellInteractionController : MonoBehaviour
         }
         if (_selectedCell != null && _selectedCell != cellView)
         {
-            Debug.Log("Send your fighters to another cell");
+            SendCells(cellView);
         }
         if (_selectedCell == cellView) 
         {
@@ -57,8 +61,7 @@ public class CellInteractionController : MonoBehaviour
     {
         if(_selectedCell != null)
         {
-            Debug.Log("Attacking " + cellView.name);
-            Unselect();
+            SendCells(cellView);
         }
     }
 
@@ -68,4 +71,23 @@ public class CellInteractionController : MonoBehaviour
         Debug.Log("Unselect");
     }
 
+    private void SendCells(CellView target)
+    {
+        _selectedCell.TryGetComponent<IFighterChanger>(out IFighterChanger cell);
+        OwnerEnum owner = cell.CheckOwner();
+        int fighters = cell.CheckFighters();
+        int fightersToSpawn = Mathf.RoundToInt(fighters / 2);
+        _spawningCoroutine = StartCoroutine(FighterSpawningCoroutine(owner, target, fightersToSpawn));
+    }
+
+    private IEnumerator FighterSpawningCoroutine(OwnerEnum owner, CellView target, int fightersToSpawn)
+    {
+        for (int i = 0; i < fightersToSpawn; i++)
+        {
+            _fighterController.EmitFighter(owner, _selectedCell.transform, target.transform);
+            yield return new WaitForSecondsRealtime(_nextTimeToEmit);
+        }
+        _spawningCoroutine = null;
+        Unselect();
+    }
 }
