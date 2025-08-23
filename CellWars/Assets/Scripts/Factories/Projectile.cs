@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour
     {
         _owner = owner;
         _targetPosition = target;
-        Debug.Log(target.ToString());
         _isActive = true;
     }
 

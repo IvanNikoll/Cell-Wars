@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb729ede72c584459eddaa2d1c0b152, type: 3}
-  m_Name: PlayerSettings
+  m_Script: {fileID: 11500000, guid: 4c06704812d96c34b80d7efef0bb432e, type: 3}
+  m_Name: NPCStats
   m_EditorClassIdentifier: 
-  _fighters: 15
-  _limit: 50
-  _owner: 0
-  _addInterval: 1
+  _fighters: 1
+  _limit: 80
+  _owner: 1
+  _addInterval: 2

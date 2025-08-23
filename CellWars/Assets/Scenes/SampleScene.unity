@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 69291111}
   - component: {fileID: 69291112}
   - component: {fileID: 69291113}
+  - component: {fileID: 69291114}
   m_Layer: 0
   m_Name: Services
   m_TagString: Untagged
@@ -151,14 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa179bf77875e749a65bcdd9a0979a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cellInitializer: {fileID: 69291114}
   _playerPrefab: {fileID: 8687940564649431453, guid: 2003b87f14db0c24c852e897c5d0fd0e, type: 3}
   _NPCPrefab: {fileID: 8687940564649431453, guid: 2b3ef466922a0cd479a0067675a499d1, type: 3}
   _playerCellPos: {x: 0, y: 0, z: 0}
   _NPCCellPos: {x: 2, y: 2, z: 0}
   _cellFactory: {fileID: 69291111}
-  PlayerSettings: {fileID: 11400000, guid: 37f35b3b5cf92984f87d1b55d94780f9, type: 2}
-  NPCSettings: {fileID: 11400000, guid: e900ddba4b8cb2d4bbe61c4b1418d4d3, type: 2}
-  _tickService: {fileID: 1018949525}
 --- !u!4 &69291110
 Transform:
   m_ObjectHideFlags: 0
@@ -215,6 +214,21 @@ MonoBehaviour:
   _collectionCheck: 1
   _defaultCapacity: 100
   _maxSize: 500
+--- !u!114 &69291114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69291108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6d8862bb51f7b44937c07f359da424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerStats: {fileID: 11400000, guid: cfecc6f67efed524bb5538e9c0989876, type: 2}
+  _NPCStats: {fileID: 11400000, guid: 20800e0391e1a9a478fbd363c88ef780, type: 2}
+  _tickService: {fileID: 1018949525}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellSpawner: {fileID: 69291109}
+  _cellInitializer: {fileID: 69291114}
 --- !u!114 &1018949525
 MonoBehaviour:
   m_ObjectHideFlags: 0

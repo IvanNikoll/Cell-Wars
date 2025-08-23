@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,8 +7,14 @@ using UnityEngine;
 public class LevelBootstrap : MonoBehaviour
 {
     [SerializeField] private CellSpawner _cellSpawner;
+    [SerializeField] private CellInitializer _cellInitializer;
 
-    private void Start()
+    private void Awake()
+    {
+        _cellInitializer.Configsloaded += OnConfigsLoaded;
+    }
+
+    private void OnConfigsLoaded()
     {
         InitiatePlayer();
         InitiateEnemy();
