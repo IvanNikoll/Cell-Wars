@@ -6,10 +6,11 @@ using UnityEngine;
 /// </summary>
 public class Cell : MonoBehaviour, IFighterChanger
 {
-    public event Action<OwnerEnum> OnEngage;
+    public event Action<OwnerEnum> OwnerChanged;
     public event Action<Cell> Clicked;
+    public event Action<int> FighterChanged;
 
-    [SerializeField, Range(0,1000)] private int _fighters;
+    [SerializeField, Range(0, 1000)] private int _fighters;
     [SerializeField] private int _limit;
     [SerializeField] private OwnerEnum _owner;
 
@@ -27,16 +28,19 @@ public class Cell : MonoBehaviour, IFighterChanger
     public void AddFighter()
     {
         _fighters++;
+        FighterChanged?.Invoke(_fighters);
     }
 
     public void RemoveFighter()
     {
         _fighters--;
+        FighterChanged?.Invoke(_fighters);
     }
 
     public void ChangeOwner(OwnerEnum newOwner)
     {
         _owner = newOwner;
+        OwnerChanged?.Invoke(newOwner);
     }
 
     public int CheckFighters()
@@ -47,5 +51,15 @@ public class Cell : MonoBehaviour, IFighterChanger
     public OwnerEnum CheckOwner()
     {
         return Owner;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.TryGetComponent<Projectile>(out Projectile fighter);
+        if (fighter != null)
+        {
+            if (_fighters == 0)
+                ChangeOwner(fighter.Owner);
+        }
     }
 }

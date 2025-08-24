@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellInitializer: {fileID: 69291114}
-  _playerPrefab: {fileID: 8687940564649431453, guid: 2003b87f14db0c24c852e897c5d0fd0e, type: 3}
-  _NPCPrefab: {fileID: 8687940564649431453, guid: 2b3ef466922a0cd479a0067675a499d1, type: 3}
+  _playerPrefab: {fileID: 9043465000698488140, guid: 3a1a8962548013e41bade03d7763a18a, type: 3}
+  _NPCPrefab: {fileID: 9043465000698488140, guid: 3a1a8962548013e41bade03d7763a18a, type: 3}
   _playerCellPos: {x: 0, y: 0, z: 0}
   _NPCCellPos: {x: 2, y: 2, z: 0}
   _cellFactory: {fileID: 69291111}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d681b4e041cbd4580ab875efa2eafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fighterPrefab: {fileID: 1945383350703141898, guid: feb1a613e8bab7141a411721f3d8fd5c, type: 3}
+  _fighterPrefab: {fileID: 692704128163843765, guid: 889ba89d857e7e9458f80444938ef39b, type: 3}
   _emitionPosition: {fileID: 0}
   _collectionCheck: 1
   _defaultCapacity: 100

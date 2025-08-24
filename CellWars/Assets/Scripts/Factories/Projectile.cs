@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 {
     private IObjectPool<Projectile> _objectPool;
     public IObjectPool<Projectile> ObjectPool { set { _objectPool = value; } }
+    public OwnerEnum Owner { get { return _owner; } }
 
     [SerializeField] private OwnerEnum _owner;
     [SerializeField] private Vector3 _targetPosition;

@@ -106,7 +106,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -139,6 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9b704bb74e92b4f8195106fc0730b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cellColor: {r: 0, g: 0, b: 0, a: 0}
+  _cellSprite: {fileID: 0}
+  _cellTransform: {fileID: 0}
+  _cellText: {fileID: 0}
 --- !u!114 &2082995381799287180
 MonoBehaviour:
   m_ObjectHideFlags: 0
