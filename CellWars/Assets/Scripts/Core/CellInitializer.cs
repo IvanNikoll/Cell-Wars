@@ -29,6 +29,8 @@ public class CellInitializer : MonoBehaviour
         {
             cell.InitializeCell(config.Fighters, config.Limit, config.Owner);
             CellBrain cellBrain = new CellBrain(cell, _tickService, config.AddInterval);
+            cell.gameObject.TryGetComponent<NPCController>(out NPCController npcController);
+            if (npcController != null) npcController.Initialize(cellBrain);
         }
         else throw new ArgumentNullException(nameof(config));
     }

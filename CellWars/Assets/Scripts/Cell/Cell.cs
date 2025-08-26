@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// This class holds information about cell and its stats
 /// </summary>
-public class Cell : MonoBehaviour, IFighterChanger
+public class Cell : MonoBehaviour, IFighterChanger, IAttackable
 {
     public event Action<OwnerEnum> OwnerChanged;
     public event Action<Cell> Clicked;
@@ -51,6 +51,12 @@ public class Cell : MonoBehaviour, IFighterChanger
     public OwnerEnum CheckOwner()
     {
         return Owner;
+    }
+
+    public Vector3 CheckPosition()
+    {
+        Vector3 position = this.gameObject.transform.position;
+        return position;
     }
 
     private void OnTriggerEnter(Collider other)

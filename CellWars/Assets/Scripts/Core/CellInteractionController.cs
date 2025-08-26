@@ -79,18 +79,19 @@ public class CellInteractionController : MonoBehaviour
         OwnerEnum owner = cell.CheckOwner();
         int fighters = cell.CheckFighters();
         int fightersToSpawn = Mathf.RoundToInt(fighters / 2);
-        _spawningCoroutine = StartCoroutine(FighterSpawningCoroutine(cell, owner, target, fightersToSpawn));
+        StartCoroutine(FighterSpawningCoroutine(cell, owner, _selectedCell, target, fightersToSpawn));
+        Unselect();
     }
 
-    private IEnumerator FighterSpawningCoroutine(IFighterChanger fighterChanger, OwnerEnum owner, CellView target, int fightersToSpawn)
+    private IEnumerator FighterSpawningCoroutine(IFighterChanger fighterChanger, OwnerEnum owner, CellView parent, CellView target, int fightersToSpawn)
     {
+        Debug.Log($"Coroutine started for {fightersToSpawn} fighters");
         for (int i = 0; i < fightersToSpawn; i++)
         {
-            _fighterController.EmitFighter(owner, _selectedCell.transform, target.transform);
+            _fighterController.EmitFighter(owner, parent.transform, target.transform);
             fighterChanger.RemoveFighter();
             yield return new WaitForSecondsRealtime(_nextTimeToEmit);
         }
-        _spawningCoroutine = null;
-        Unselect();
+        Debug.Log("Coroutine finished");
     }
 }
