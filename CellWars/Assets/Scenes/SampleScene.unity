@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellInitializer: {fileID: 69291114}
+  _cellInteractionController: {fileID: 1018949527}
   _playerPrefab: {fileID: 9043465000698488140, guid: 3a1a8962548013e41bade03d7763a18a, type: 3}
   _NPCPrefab: {fileID: 9043465000698488140, guid: 3a1a8962548013e41bade03d7763a18a, type: 3}
   _playerCellPos: {x: 0, y: 0, z: 0}

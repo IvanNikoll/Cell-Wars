@@ -6,7 +6,7 @@ using UnityEngine;
 public class CellSpawner : MonoBehaviour
 {
     [SerializeField] private CellInitializer _cellInitializer;
-
+    [SerializeField] private CellInteractionController _cellInteractionController;
     [SerializeField] private Cell _playerPrefab;
     [SerializeField] private Cell _NPCPrefab;
     [SerializeField] private Vector3 _playerCellPos;
@@ -18,14 +18,14 @@ public class CellSpawner : MonoBehaviour
         if (owner == OwnerEnum.Player1)
         {
             Cell player = _cellFactory.GetCell(_playerPrefab);
-            _cellInitializer.InitializeCell(player, owner);
+            _cellInitializer.InitializeCell(player, owner, _cellInteractionController);
             player.transform.position = _playerCellPos; // to be loaded from level settings
             return player;
         }
         else
         {
             Cell NPC = _cellFactory.GetCell(_NPCPrefab);
-            _cellInitializer.InitializeCell(NPC,owner);
+            _cellInitializer.InitializeCell(NPC,owner, _cellInteractionController);
             NPC.transform.position = _NPCCellPos; // to be loaded from level settings
             return NPC;
         }

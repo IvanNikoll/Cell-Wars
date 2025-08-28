@@ -13,16 +13,17 @@ public class Cell : MonoBehaviour, IFighterChanger, IAttackable
     [SerializeField, Range(0, 1000)] private int _fighters;
     [SerializeField] private int _limit;
     [SerializeField] private OwnerEnum _owner;
-
     public  int Fighters {  get { return _fighters; }}
     public int Limit { get { return _limit; }}
     public OwnerEnum Owner { get { return _owner; }}
+    private Collider _collider;
 
     public void InitializeCell(int fighters, int limit, OwnerEnum owner)
     {
         _fighters = fighters;
         _limit = limit;
         _owner = owner;
+        TryGetComponent<Collider>(out _collider);
     }
 
     public void AddFighter()
@@ -53,10 +54,9 @@ public class Cell : MonoBehaviour, IFighterChanger, IAttackable
         return Owner;
     }
 
-    public Vector3 CheckPosition()
+    public Collider GetCollider()
     {
-        Vector3 position = this.gameObject.transform.position;
-        return position;
+        return _collider;
     }
 
     private void OnTriggerEnter(Collider other)

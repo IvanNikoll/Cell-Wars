@@ -6,7 +6,6 @@ public class CellBrain
     private IFighterChanger _fighterChanger;
     private TickService _tickService;
     private Cell _cell;
-
     private float _addInterval;
     private float _timer;
 

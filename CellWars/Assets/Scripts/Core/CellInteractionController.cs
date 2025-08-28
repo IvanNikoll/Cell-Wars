@@ -12,7 +12,7 @@ public class CellInteractionController : MonoBehaviour
     [SerializeField] private ClickHandler _clickHandler;
     [SerializeField] private CellView _selectedCell;
     private Coroutine _spawningCoroutine;
-    private float _nextTimeToEmit = 0.5f;
+    private float _nextTimeToEmit = 0.2f;
 
     public void Start()
     {
@@ -73,25 +73,29 @@ public class CellInteractionController : MonoBehaviour
         _selectedCell = null;
     }
 
-    private void SendCells(CellView target)
+    private void SendCells(CellView targetView)
     {
-        _selectedCell.TryGetComponent<IFighterChanger>(out IFighterChanger cell);
+        _selectedCell.TryGetComponent<IAttackable>(out IAttackable cell);
+        targetView.TryGetComponent<IAttackable>(out IAttackable target);
         OwnerEnum owner = cell.CheckOwner();
         int fighters = cell.CheckFighters();
         int fightersToSpawn = Mathf.RoundToInt(fighters / 2);
-        StartCoroutine(FighterSpawningCoroutine(cell, owner, _selectedCell, target, fightersToSpawn));
+        StartCoroutine(FighterSpawningCoroutine(cell, target, fightersToSpawn));
         Unselect();
     }
 
-    private IEnumerator FighterSpawningCoroutine(IFighterChanger fighterChanger, OwnerEnum owner, CellView parent, CellView target, int fightersToSpawn)
+    public void SendCells(IAttackable host, IAttackable target, int amount)
     {
-        Debug.Log($"Coroutine started for {fightersToSpawn} fighters");
+        StartCoroutine(FighterSpawningCoroutine(host, target, amount));
+    }
+
+    private IEnumerator FighterSpawningCoroutine(IAttackable host, IAttackable target, int fightersToSpawn)
+    {
         for (int i = 0; i < fightersToSpawn; i++)
         {
-            _fighterController.EmitFighter(owner, parent.transform, target.transform);
-            fighterChanger.RemoveFighter();
+            _fighterController.EmitFighter(host, target);
+            host.RemoveFighter();
             yield return new WaitForSecondsRealtime(_nextTimeToEmit);
         }
-        Debug.Log("Coroutine finished");
     }
 }

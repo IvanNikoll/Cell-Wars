@@ -15,4 +15,4 @@ MonoBehaviour:
   _fighters: 20
   _limit: 80
   _owner: 1
-  _addInterval: 2
+  _addInterval: 3

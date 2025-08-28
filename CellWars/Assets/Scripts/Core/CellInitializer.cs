@@ -22,7 +22,7 @@ public class CellInitializer : MonoBehaviour
         Configsloaded?.Invoke();
     }
 
-    public void InitializeCell(Cell cell, OwnerEnum owner)
+    public void InitializeCell(Cell cell, OwnerEnum owner, CellInteractionController interactionController)
     {
         CellConfig config = GetConfig(owner);
         if (config != null)
@@ -30,7 +30,7 @@ public class CellInitializer : MonoBehaviour
             cell.InitializeCell(config.Fighters, config.Limit, config.Owner);
             CellBrain cellBrain = new CellBrain(cell, _tickService, config.AddInterval);
             cell.gameObject.TryGetComponent<NPCController>(out NPCController npcController);
-            if (npcController != null) npcController.Initialize(cellBrain);
+            if (npcController != null) npcController.Initialize(cellBrain, interactionController);
         }
         else throw new ArgumentNullException(nameof(config));
     }

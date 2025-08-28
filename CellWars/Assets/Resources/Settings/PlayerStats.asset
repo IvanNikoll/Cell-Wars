@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c06704812d96c34b80d7efef0bb432e, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  _fighters: 10
+  _fighters: 20
   _limit: 50
   _owner: 0
-  _addInterval: 1
+  _addInterval: 0.99

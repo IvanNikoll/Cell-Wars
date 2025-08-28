@@ -32,11 +32,11 @@ public class FighterController : MonoBehaviour
         }
     }
 
-    public void EmitFighter(OwnerEnum owner,Transform hostTransform, Transform targetTransform)
+    public void EmitFighter(IAttackable host, IAttackable target)
     {
         Projectile fighter = _objectPool.Get();
-        fighter.transform.SetPositionAndRotation(hostTransform.position, hostTransform.rotation);
-        fighter.Initialize(owner, targetTransform.position);
+        fighter.transform.SetPositionAndRotation(host.GetCollider().transform.position, fighter.transform.rotation);
+        fighter.Initialize(host, target);
         _canEmit = false;
     }
 

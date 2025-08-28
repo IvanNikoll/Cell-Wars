@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 /// <summary>
@@ -6,55 +6,70 @@ using UnityEngine.Pool;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
+    private IAttackable _host;
+    private IAttackable _target;
     private IObjectPool<Projectile> _objectPool;
     public IObjectPool<Projectile> ObjectPool { set { _objectPool = value; } }
-    public OwnerEnum Owner { get { return _owner; } }
+    public OwnerEnum Owner { get { return _host.CheckOwner(); } }
 
-    [SerializeField] private OwnerEnum _owner;
-    [SerializeField] private Vector3 _targetPosition;
-    [SerializeField] private bool _isActive;
-
+    private Collider _hostCollider;
+    private Collider _targetCollider;  
+    private bool _isActive;
     private float _speed = 0.3f; // to be set in Initialize later;
 
-    public void Initialize(OwnerEnum owner, Vector3 target)
+    public void Initialize(IAttackable host, IAttackable target)
     {
-        _owner = owner;
-        _targetPosition = target;
+        _host = host;
+        _target = target;
+        _hostCollider = host.GetCollider();
+        _targetCollider = target.GetCollider();
         _isActive = true;
+        transform.LookAt(_targetCollider.transform);
     }
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (_isActive) 
+        if (_isActive && _target != null)
         {
-             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                _targetCollider.transform.position,
+                _speed * Time.fixedDeltaTime
+            );
         }
     }
 
     public void Deactivate()
     {
-        _owner = OwnerEnum.Player1;
-        _targetPosition = Vector3.zero;
+        _host = null;
+        _target = null;
         _isActive = false;
         _objectPool.Release(this);
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.TryGetComponent<IFighterChanger>(out IFighterChanger cell);
-        OwnerEnum incomingOwner = cell.CheckOwner();
-        bool isTarget;
-        if(other.gameObject.transform.position == _targetPosition)
-            isTarget = true;
-        else isTarget = false;
-        if (isTarget && cell != null && incomingOwner != _owner)
+        if (other == _hostCollider)
+            return;
+        if(other.TryGetComponent<Projectile>(out Projectile projectile))
         {
-            cell.RemoveFighter();
-            Deactivate();
+            if(projectile != null)
+            {
+                if(projectile.Owner != Owner)
+                {
+                    projectile.Deactivate();
+                    Deactivate();
+                }
+            }
         }
-        if (isTarget && cell != null && incomingOwner == _owner)
+        if (_target != null && other == _targetCollider)
         {
-            cell.AddFighter();
+            var incomingOwner = _target.CheckOwner();
+
+            if (incomingOwner != _host.CheckOwner())
+                _target.RemoveFighter();
+            else
+                _target.AddFighter();
             Deactivate();
         }
     }
