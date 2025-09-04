@@ -29,18 +29,21 @@ public class ClickHandler : MonoBehaviour
 
     private void OnClick(InputAction.CallbackContext ctx)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (GameStateController.Instance.CanClick)
         {
-            hit.collider.TryGetComponent<CellView>(out CellView cellView);
-            if (cellView != null)
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Click?.Invoke(cellView);
-            }
-            else
-            {
-                Click?.Invoke(null);
+                hit.collider.TryGetComponent<CellView>(out CellView cellView);
+                if (cellView != null)
+                {
+                    Click?.Invoke(cellView);
+                }
+                else
+                {
+                    Click?.Invoke(null);
+                }
             }
         }
     }

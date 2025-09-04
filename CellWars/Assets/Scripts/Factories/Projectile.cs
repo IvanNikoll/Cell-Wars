@@ -10,17 +10,18 @@ public class Projectile : MonoBehaviour
     private IAttackable _target;
     private IObjectPool<Projectile> _objectPool;
     public IObjectPool<Projectile> ObjectPool { set { _objectPool = value; } }
-    public OwnerEnum Owner { get { return _host.CheckOwner(); } }
-
+    public OwnerEnum Owner { get { return _owner; } }
+    public bool IsActive {  get { return _isActive; } }
     private Collider _hostCollider;
     private Collider _targetCollider;  
     private bool _isActive;
     private float _speed = 0.3f; // to be set in Initialize later;
-
+    private OwnerEnum _owner;
     public void Initialize(IAttackable host, IAttackable target)
     {
         _host = host;
         _target = target;
+        _owner = host.CheckOwner();
         _hostCollider = host.GetCollider();
         _targetCollider = target.GetCollider();
         _isActive = true;
@@ -55,7 +56,7 @@ public class Projectile : MonoBehaviour
         {
             if(projectile != null)
             {
-                if(projectile.Owner != Owner)
+                if(projectile.Owner != Owner && projectile.IsActive)
                 {
                     projectile.Deactivate();
                     Deactivate();

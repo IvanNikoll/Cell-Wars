@@ -56,7 +56,7 @@ public class NPCController : MonoBehaviour
 
     private void TryAttack()
     {
-        if (_enemies.Count == 0)
+        if (_enemies.Count == 0 || !GameStateController.Instance.CanEmit)
             return;
 
         int myFighters = _host.Fighters;
