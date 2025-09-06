@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,10 +7,14 @@ using UnityEngine;
 /// </summary>
 public class CellView : MonoBehaviour, IViewUpdater
 {
+    [SerializeField] private Cell _cell;
+    private CellInitializer _cellInitializer;
     [SerializeField] private Color _cellColor;
     [SerializeField] private Sprite _cellSprite;
     [SerializeField] private Transform _cellTransform;
     [SerializeField] private TextMeshPro _cellText;
+    [SerializeField] private MeshRenderer _innerCellMeshRenderer;
+    [SerializeField] private MeshRenderer _outerCellMeshRenderer;
     private Vector3 _defaultScale;
 
     public Color CellColor { get { return _cellColor; } set { _cellColor = value; } }
@@ -18,15 +23,32 @@ public class CellView : MonoBehaviour, IViewUpdater
     private void Start()
     {
         _defaultScale = transform.localScale;
+        _cell.OwnerChanged += UpdateColor;
     }
 
-    public void InitializeView(Color color, Sprite sprite, Transform transform, TextMeshPro cellText)
+    private void UpdateColor(OwnerEnum owner)
     {
+        Color color;
+        switch (owner)
+        {
+            case OwnerEnum.Player1:
+                color = _cellInitializer.PlayerConfig.Color;
+                break;
+            case OwnerEnum.Player2:
+                color = _cellInitializer.NPCConfig.Color;
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+        UpdateVisual(color);
+    }
+
+    public void InitializeView(Color color, CellInitializer cellInitializer)
+    {
+        _cellInitializer = cellInitializer;
         _cellColor = color;
-        _cellSprite = sprite;
-        _cellTransform = transform;
-        _cellText = cellText;
         _defaultScale = _cellTransform.localScale;
+        UpdateVisual(color);
     }
 
     public void ShowText(string text)
@@ -48,9 +70,13 @@ public class CellView : MonoBehaviour, IViewUpdater
         return _defaultScale;
     }
 
-    public void UpdateVisual()
+    public void UpdateVisual(Color color)
     {
-        //pass view prefab here and assign it to cell
+        Material material = new Material(_innerCellMeshRenderer.material);
+        material.color = color;
+        material.SetFloat("_Metallic", 1f);
+        _innerCellMeshRenderer.material = material;
+        _outerCellMeshRenderer.material = material;
     }
 
     public void ShowScale(System.Numerics.Vector3 scale)

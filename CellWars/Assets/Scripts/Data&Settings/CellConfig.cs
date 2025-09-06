@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class CellConfig
 {
@@ -6,8 +7,9 @@ public class CellConfig
     public int Limit {  get; }
     public OwnerEnum Owner { get; }
     public float AddInterval { get; }
+    public Color Color { get; }
 
-    public CellConfig(int fighters, int limit, OwnerEnum owner, float addInterval)
+    public CellConfig(int fighters, int limit, OwnerEnum owner, float addInterval, Color color)
     {
         if (fighters > 0)
             Fighters = fighters;
@@ -19,5 +21,6 @@ public class CellConfig
         if(addInterval > 0)
             AddInterval = addInterval;
         else throw new ArgumentOutOfRangeException(nameof(addInterval));
+        Color = color;
     }
 }

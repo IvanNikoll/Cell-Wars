@@ -7,9 +7,11 @@ public class CellStats : ScriptableObject
     [SerializeField, Range(0,500)] private int _limit;
     [SerializeField] private OwnerEnum _owner;
     [SerializeField, Range(0.2f,3)] private float _addInterval;
+    [SerializeField] private Color _color;
 
     public int Fighters { get { return _fighters; } }
     public int Limit { get { return _limit; } }
     public OwnerEnum Owner { get { return _owner; } }
     public float AddInterval { get { return _addInterval; } }
+    public Color Color { get { return _color; } }
 }

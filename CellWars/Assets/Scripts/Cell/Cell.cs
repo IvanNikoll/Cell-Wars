@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Cell : MonoBehaviour, IFighterChanger, IAttackable
 {
-    public event Action OwnerChanged;
+    public event Action<OwnerEnum> OwnerChanged;
     public event Action<Cell> Clicked;
     public event Action<int> FighterChanged;
 
@@ -41,7 +41,7 @@ public class Cell : MonoBehaviour, IFighterChanger, IAttackable
     public void ChangeOwner(OwnerEnum newOwner)
     {
         _owner = newOwner;
-        OwnerChanged?.Invoke();
+        OwnerChanged?.Invoke(newOwner);
     }
 
     public int CheckFighters()

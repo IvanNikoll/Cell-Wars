@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fighterPrefab: {fileID: 692704128163843765, guid: 889ba89d857e7e9458f80444938ef39b, type: 3}
   _emitionPosition: {fileID: 0}
+  _cellInitializer: {fileID: 69291114}
   _collectionCheck: 1
   _defaultCapacity: 100
   _maxSize: 500

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -8,7 +9,7 @@ public class FighterController : MonoBehaviour
 {
     [SerializeField] private Projectile _fighterPrefab;
     [SerializeField] private Transform _emitionPosition;
-
+    [SerializeField] private CellInitializer _cellInitializer;
     [SerializeField] private IObjectPool<Projectile> _objectPool;
     [SerializeField] private bool _collectionCheck = true;
     [SerializeField] private int _defaultCapacity;
@@ -36,8 +37,26 @@ public class FighterController : MonoBehaviour
     {
         Projectile fighter = _objectPool.Get();
         fighter.transform.SetPositionAndRotation(host.GetCollider().transform.position, fighter.transform.rotation);
-        fighter.Initialize(host, target);
+        Color projectileColor = SetColor(host);
+        fighter.Initialize(host, target, projectileColor);
         _canEmit = false;
+    }
+
+    private Color SetColor(IAttackable host)
+    {
+        Color color;
+        OwnerEnum owner = host.CheckOwner();
+        switch (owner)
+        {
+            case OwnerEnum.Player1:
+                color = _cellInitializer.PlayerConfig.Color; 
+                return color;
+            case OwnerEnum.Player2:
+                color = _cellInitializer.NPCConfig.Color;
+                return color;
+            default: 
+                throw new NotImplementedException();
+        }
     }
 
     private Projectile CreateProjectile()

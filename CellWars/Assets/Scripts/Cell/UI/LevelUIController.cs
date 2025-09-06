@@ -57,10 +57,10 @@ public class LevelUIController : MonoBehaviour
             cell.OwnerChanged += UpdateLists;
         }
 
-        UpdateLists();
+        UpdateLists(OwnerEnum.Player1);
     }
 
-    private void UpdateLists()
+    private void UpdateLists(OwnerEnum owner)
     {
         CheckDestroyed();
         _playerCells.Clear();

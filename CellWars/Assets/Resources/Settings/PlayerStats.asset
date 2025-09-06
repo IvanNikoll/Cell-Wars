@@ -15,4 +15,5 @@ MonoBehaviour:
   _fighters: 20
   _limit: 50
   _owner: 0
-  _addInterval: 0.99
+  _addInterval: 0.2
+  _color: {r: 0.063229226, g: 0.6663821, b: 0.8742138, a: 0}

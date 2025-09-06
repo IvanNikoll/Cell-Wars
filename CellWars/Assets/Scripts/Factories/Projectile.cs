@@ -6,6 +6,8 @@ using UnityEngine.Pool;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
+    public Color Color {  get; private set; }
+    [SerializeField] private MeshRenderer _meshRenderer;
     private IAttackable _host;
     private IAttackable _target;
     private IObjectPool<Projectile> _objectPool;
@@ -17,7 +19,7 @@ public class Projectile : MonoBehaviour
     private bool _isActive;
     private float _speed = 0.3f; // to be set in Initialize later;
     private OwnerEnum _owner;
-    public void Initialize(IAttackable host, IAttackable target)
+    public void Initialize(IAttackable host, IAttackable target, Color color)
     {
         _host = host;
         _target = target;
@@ -26,6 +28,11 @@ public class Projectile : MonoBehaviour
         _targetCollider = target.GetCollider();
         _isActive = true;
         transform.LookAt(_targetCollider.transform);
+
+        Material material = new Material(_meshRenderer.material);
+        material.color = color;
+        material.SetFloat("_Metallic", 1f);
+        _meshRenderer.material = material;
     }
 
     private void FixedUpdate()

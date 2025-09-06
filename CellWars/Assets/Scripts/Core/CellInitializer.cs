@@ -4,12 +4,13 @@ using UnityEngine;
 public class CellInitializer : MonoBehaviour
 {
     public event Action Configsloaded;
+    public CellConfig PlayerConfig { get { return _playerConfig; } }
+    public CellConfig NPCConfig { get { return _NPCConfig; } }
     [SerializeField] private CellStats _playerStats;
     [SerializeField] private CellStats _NPCStats;
     [SerializeField] private CellConfig _playerConfig;
     [SerializeField] private CellConfig _NPCConfig;
     [SerializeField] private TickService _tickService;
-
     private void Start()
     {
         LoadConfigs();
@@ -17,8 +18,8 @@ public class CellInitializer : MonoBehaviour
 
     private void LoadConfigs()
     {
-        _playerConfig = new CellConfig(_playerStats.Fighters, _playerStats.Limit, _playerStats.Owner, _playerStats.AddInterval);
-        _NPCConfig = new CellConfig(_NPCStats.Fighters, _NPCStats.Limit, _NPCStats.Owner, _NPCStats.AddInterval);
+        _playerConfig = new CellConfig(_playerStats.Fighters, _playerStats.Limit, _playerStats.Owner, _playerStats.AddInterval, _playerStats.Color);
+        _NPCConfig = new CellConfig(_NPCStats.Fighters, _NPCStats.Limit, _NPCStats.Owner, _NPCStats.AddInterval, _NPCStats.Color);
         Configsloaded?.Invoke();
     }
 
@@ -28,6 +29,8 @@ public class CellInitializer : MonoBehaviour
         if (config != null)
         {
             cell.InitializeCell(config.Fighters, config.Limit, config.Owner);
+            cell.gameObject.TryGetComponent<CellView>(out CellView cellView);
+            if (cellView != null) cellView.InitializeView(config.Color, this);
             CellBrain cellBrain = new CellBrain(cell, _tickService, config.AddInterval);
             cell.gameObject.TryGetComponent<NPCController>(out NPCController npcController);
             if (npcController != null) npcController.Initialize(cellBrain, interactionController);

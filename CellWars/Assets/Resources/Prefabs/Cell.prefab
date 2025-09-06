@@ -436,10 +436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9b704bb74e92b4f8195106fc0730b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cell: {fileID: 9043465000698488140}
+  _cellInitializer: {fileID: 0}
   _cellColor: {r: 0, g: 0, b: 0, a: 0}
   _cellSprite: {fileID: 0}
   _cellTransform: {fileID: 4512328673867617049}
   _cellText: {fileID: 5578302636025250862}
+  _innerCellMeshRenderer: {fileID: 2043182838588282122}
+  _outerCellMeshRenderer: {fileID: 3953673997857054932}
 --- !u!114 &6145400585526339948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _host: {fileID: 9043465000698488140}
+  _interactionController: {fileID: 0}
 --- !u!54 &4347651193312662202
 Rigidbody:
   m_ObjectHideFlags: 0
