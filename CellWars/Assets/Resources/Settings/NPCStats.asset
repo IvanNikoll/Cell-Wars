@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c06704812d96c34b80d7efef0bb432e, type: 3}
   m_Name: NPCStats
   m_EditorClassIdentifier: 
-  _fighters: 20
+  _fighters: 25
   _limit: 80
   _owner: 1
-  _addInterval: 0.8
+  _addInterval: 1
   _color: {r: 0.14030367, g: 0.51572317, b: 0, a: 0}

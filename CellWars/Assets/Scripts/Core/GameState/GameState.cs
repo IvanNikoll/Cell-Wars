@@ -2,6 +2,7 @@ public abstract class GameState
 {
     public bool CanClick { get; protected set; }
     public bool CanEmit { get; protected set; }
+    public bool CanupdateUI { get; protected set; }
     public virtual void Enter() { }
     public virtual void Exit() { }
 }
@@ -12,6 +13,7 @@ public class LoadingState : GameState
     {
         CanClick = false;
         CanEmit = false;
+        CanupdateUI = false;
     }
 
     public override void Enter()
@@ -24,13 +26,14 @@ public class LoadingState : GameState
 public class CountDownState : GameState
 {
     private TickService _tickService;
-    private const float COUNTDOWNINTERVAL = 15f;
+    private const float COUNTDOWNINTERVAL = 5f;
     private float _timer;
     public CountDownState(TickService tickService)
     {
         _tickService = tickService;
         CanClick = false;
         CanEmit = false;
+        CanupdateUI = true;
         Subscribe();
     }
 
@@ -71,6 +74,7 @@ public class StartState : GameState
     {
         CanClick = true;
         CanEmit = true;
+        CanupdateUI= true;
     }
 
     public override void Enter()

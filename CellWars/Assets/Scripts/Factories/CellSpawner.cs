@@ -1,4 +1,6 @@
+using System.Linq;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// This class spawns cells on level start
@@ -12,6 +14,7 @@ public class CellSpawner : MonoBehaviour
     [SerializeField] private Vector3 _playerCellPos;
     [SerializeField] private Vector3 _NPCCellPos;
     [SerializeField] private CellFactory _cellFactory;
+    [Inject] [SerializeField] private LevelContext _levelContext;
 
     public Cell GetCell(OwnerEnum owner)
     {
@@ -26,7 +29,8 @@ public class CellSpawner : MonoBehaviour
         {
             Cell NPC = _cellFactory.GetCell(_NPCPrefab);
             _cellInitializer.InitializeCell(NPC,owner, _cellInteractionController);
-            NPC.transform.position = _NPCCellPos; // to be loaded from level settings
+            //NPC.transform.position = _NPCCellPos; // to be loaded from level settings
+            NPC.transform.position = _levelContext.EnemyPosition.FirstOrDefault();
             return NPC;
         }
     }

@@ -1,5 +1,6 @@
 public enum OwnerEnum 
 {
     Player1,
-    Player2
+    Player2,
+    Neutral
 }

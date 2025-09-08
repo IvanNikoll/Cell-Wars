@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class CellInitializer : MonoBehaviour
 {
@@ -7,17 +8,16 @@ public class CellInitializer : MonoBehaviour
     public CellConfig PlayerConfig { get { return _playerConfig; } }
     public CellConfig NPCConfig { get { return _NPCConfig; } }
     [SerializeField] private CellStats _playerStats;
-    [SerializeField] private CellStats _NPCStats;
+    //[SerializeField] private CellStats _NPCStats;
     [SerializeField] private CellConfig _playerConfig;
     [SerializeField] private CellConfig _NPCConfig;
     [SerializeField] private TickService _tickService;
+    [SerializeField] private CellStats _NPCStats;
+    [Inject] [SerializeField] private LevelContext _levelContext;
+
     private void Start()
     {
-        LoadConfigs();
-    }
-
-    private void LoadConfigs()
-    {
+        _NPCStats = _levelContext.GetEnemyStats();
         _playerConfig = new CellConfig(_playerStats.Fighters, _playerStats.Limit, _playerStats.Owner, _playerStats.AddInterval, _playerStats.Color);
         _NPCConfig = new CellConfig(_NPCStats.Fighters, _NPCStats.Limit, _NPCStats.Owner, _NPCStats.AddInterval, _NPCStats.Color);
         Configsloaded?.Invoke();

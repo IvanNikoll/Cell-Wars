@@ -6,6 +6,7 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private LevelUIController _levelUIController;
     public bool CanClick {  get; private set; }
     public bool CanEmit {  get; private set; }
+    public bool CanUpdateUI {  get; private set; }
     public event Action<GameState> GameStateChanged;
     public static GameStateController Instance {  get; private set; }
     public GameState CurrentState { get; private set; }

@@ -81,12 +81,15 @@ public class LevelUIController : MonoBehaviour
 
     private void Tick()
     {
-        _t += Time.deltaTime;
-        if(_t > COUNTDOWNINTERVAL)
+        if (GameStateController.Instance.CanUpdateUI)
         {
-            UpdateFighters();
-            _slider.Show(_playerFighters, _npcFighters, 0);
-            _t = 0;
+            _t += Time.deltaTime;
+            if (_t > COUNTDOWNINTERVAL)
+            {
+                UpdateFighters();
+                _slider.Show(_playerFighters, _npcFighters, 0);
+                _t = 0;
+            }
         }
     }
 

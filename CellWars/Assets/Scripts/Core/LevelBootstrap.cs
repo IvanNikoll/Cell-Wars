@@ -1,13 +1,15 @@
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// This class is responcible for initiating cells on level start
 /// </summary>
 public class LevelBootstrap : MonoBehaviour
 {
-    [SerializeField] private CellSpawner _cellSpawner;
+    [Inject] private CellSpawner _cellSpawner;
+    [Inject] private LevelConfigProvider _configProvider;
+
     [SerializeField] private CellInitializer _cellInitializer;
     [SerializeField] private TickService _tickService;
     [SerializeField] private LevelUIController _levelUIController;
@@ -17,6 +19,7 @@ public class LevelBootstrap : MonoBehaviour
     {
         _levelCells = new List<Cell>();
         _cellInitializer.Configsloaded += OnConfigsLoaded;
+        _configProvider.GetLevelConfig(LevelEnum.Level2);
     }
 
     private void OnConfigsLoaded()
